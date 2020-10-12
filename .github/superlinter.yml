@@ -1,0 +1,25 @@
+name: Super-Linter
+
+# Run this workflow every time a new commit is pushed to the repository.
+on: push
+
+jobs:
+  # Set the job key. This key is displayed as the job name
+  # when a job name is not provided.
+  super-lint:
+    # Name the Job.
+    name: Run lint on the code
+    # Set the type of machine to run on.
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checks out a copy of the code on the ubuntu-latest machine.
+      - name: Checkout code.
+        uses: actions/checkout@v2
+        
+      # Runs the Super-Linter action
+      - name: Run Github Super-Linter
+        uses: github/super-linter@v3
+        env:
+          DEFAULT_BRANCH: development
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
